@@ -1,51 +1,51 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PostsList from '../../components/PostsList/PostsList'
 
 function Posts() {
-  const [arPosts, setArPosts] = useState([
-    {
-      title: 'fdgfd', id: "1"
-    },
-    {
-      title: 'gtrgrde', id: "2"
-    },
-    {
-      title: 'gyrfhrtshb',
-      id: "3"
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [arPosts, setArPosts] = useState([]);
+
+  let limitLoadingAPI = 10;
+  let afterNameLoadingAPI = null;
+
+  useEffect(() => {
+    loadingAPI();
+  }, [])
+
+  useEffect(() => {
+    if (arPosts.length !== 0) {
+      afterNameLoadingAPI = arPosts[arPosts.length - 1].data.name;
+      console.log(afterNameLoadingAPI)
     }
-  ]);
+  }, [arPosts])
 
-  const [loading, setLoading] = useState(false);
-
+// Доделать последние имя загрузки
   const loadingAPI = () => {
-    fetch('https://www.reddit.com/r/cats.json?limit=10')
+    fetch(`https://www.reddit.com/r/cats.json?limit=${limitLoadingAPI}&after=${afterNameLoadingAPI}`)
       .then(res => res.json())
       .then(
         (result) => {
-          setArPosts(result.data.children);
-          setLoading(true);
+          if (result.data.children.length !== 0) {
+            setIsLoaded(true);
+            setArPosts([...arPosts, ...result.data.children]);
+          }
         },
         // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
         // чтобы не перехватывать исключения из ошибок в самих компонентах.
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          setIsLoaded(true);
+          setError(error);
         }
       )
-    console.log(arPosts);
   }
 
-  const funcTest = str => {
-    setArPosts([{title: 'fdgdf', id: "1"}, {title: 'ggggggggg', id: "2"}, {title: 'gyrfhfffffffffffffrtshb', id: "3"}]);
-  }
   return (
     <div>
       <PostsList
+        error={error}
+        isLoaded={isLoaded}
         arPosts={arPosts}
-        loading={loading}
-        funcTest={funcTest}
       />
       <button onClick={() => loadingAPI()}></button>
     </div>

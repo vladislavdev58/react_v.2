@@ -2,7 +2,7 @@ import React from 'react'
 
 const PostsItem = props => {
   return (
-    <li onClick={() => props.funcTest(props.item.data.id)}>
+    <li>
       {props.item.data.title}
     </li>
   )
