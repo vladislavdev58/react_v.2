@@ -2,41 +2,44 @@ import React, {useState, useEffect} from 'react'
 import PostsList from '../../components/PostsList/PostsList'
 import './Posts.scss'
 
-function Posts() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [arPosts, setArPosts] = useState([]);
+const Posts = () => {
+  const [error, setError] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [arPosts, setArPosts] = useState([])
 
-  let limitLoadingAPI = 10;
-  let afterNameLoadingAPI = null;
+  // Лимит загрузки постов
+  let limitLoadingAPI = 10
+  // Последнее имя загруженного поста
+  let afterNameLoadingAPI = null
 
+  // Запускаем сразу загрузку
   useEffect(() => {
     loadingAPI();
   }, [])
 
+  // Ждем пока обновится массив и задаем имя последнего поста
   useEffect(() => {
     if (arPosts.length !== 0) {
-      afterNameLoadingAPI = arPosts[arPosts.length - 1].data.name;
-      console.log(arPosts)
+      afterNameLoadingAPI = arPosts[arPosts.length - 1].data.name
+      console.log(afterNameLoadingAPI);
     }
   }, [arPosts])
 
-// Доделать последние имя загрузки
+// Загрузка постов
   const loadingAPI = () => {
     fetch(`https://www.reddit.com/r/cats.json?limit=${limitLoadingAPI}&after=${afterNameLoadingAPI}`)
       .then(res => res.json())
       .then(
         (result) => {
           if (result.data.children.length !== 0) {
-            setIsLoaded(true);
-            setArPosts([...arPosts, ...result.data.children]);
+            setIsLoaded(true)
+            // Объединяем массивы
+            setArPosts([...arPosts, ...result.data.children])
           }
         },
-        // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-        // чтобы не перехватывать исключения из ошибок в самих компонентах.
         (error) => {
           setIsLoaded(true);
-          setError(error);
+          setError(error)
         }
       )
   }
@@ -49,7 +52,6 @@ function Posts() {
         arPosts={arPosts}
         loadingAPI={loadingAPI}
       />
-      <button onClick={() => loadingAPI()}></button>
     </div>
   )
 }

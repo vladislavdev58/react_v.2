@@ -1,7 +1,8 @@
 import React from 'react'
 
 const PostsItem = props => {
-  const data = props.item.data;
+  // Сокращение обращения
+  const data = props.item.data
 
   return (
     <div className="col-12 col-md-6 mb-4">
@@ -12,6 +13,7 @@ const PostsItem = props => {
         <div className="card-body">
           <h5 className="card-title posts__title">{data.title}</h5>
           <a href={`https://www.reddit.com${data.permalink}`} className="btn btn-primary">Open post</a>
+          <button className="btn btn-danger ml-2">Add favorite</button>
         </div>
       </div>
     </div>

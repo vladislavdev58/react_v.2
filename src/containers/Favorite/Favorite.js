@@ -1,19 +1,14 @@
-import React, { useState } from 'react'
-import PostsItem from "../../components/PostsItem/PostsItem";
+import React, {useState} from 'react'
+import FavoriteList from "../../components/FavoriteList/FavoriteList"
+import './Favorite.scss'
 
-function Favorite() {
-  const [arPosts, setArPosts] = useState([{title: 'fdgfd', id: "1"}, {title: 'gtrgrde', id: "2"}, {title: 'gyrfhrtshb', id: "3"}]);
-  console.log(arPosts);
+const Favorite = () => {
 
-  const funcTest = str => {
-    console.log(str);
-  }
-
-  return(
-    <PostsList
-      arPosts={arPosts}
-      funcTest={funcTest}
-    />
+  return (
+    <div className="favorite">
+      <h2 className="favorite__title">Favorite</h2>
+      <FavoriteList />
+    </div>
   )
 }
 
