@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import PostsList from '../../components/PostsList/PostsList'
+import './Posts.scss'
 
 function Posts() {
   const [error, setError] = useState(null);
@@ -16,7 +17,7 @@ function Posts() {
   useEffect(() => {
     if (arPosts.length !== 0) {
       afterNameLoadingAPI = arPosts[arPosts.length - 1].data.name;
-      console.log(afterNameLoadingAPI)
+      console.log(arPosts)
     }
   }, [arPosts])
 
@@ -46,6 +47,7 @@ function Posts() {
         error={error}
         isLoaded={isLoaded}
         arPosts={arPosts}
+        loadingAPI={loadingAPI}
       />
       <button onClick={() => loadingAPI()}></button>
     </div>

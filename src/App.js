@@ -9,5 +9,4 @@ function App() {
     </div>
   );
 }
-// Нужно допилить проверку на загрузку
 export default App;

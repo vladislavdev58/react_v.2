@@ -1,0 +1,28 @@
+.posts__img {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  @media (min-width: 576px) {
+    height: 512px;
+  }
+
+  img {
+    @media (min-width: 576px) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.posts__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  @media (min-width: 576px) {
+    min-height: 72px;
+  }
+}

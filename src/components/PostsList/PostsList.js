@@ -1,5 +1,6 @@
 import React from 'react'
 import PostsItem from "../PostsItem/PostsItem"
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const PostsList = props => {
   if (props.error) {
@@ -8,15 +9,23 @@ const PostsList = props => {
     return <div>Загрузка...</div>;
   } else {
     return (
-      <ul>
+      <InfiniteScroll
+        dataLength={props.arPosts.length}
+        next={() => props.loadingAPI()}
+        hasMore={true}
+        className="row"
+      >
         {props.arPosts.map((item, index) => (
-            <PostsItem
-              key={index}
-              item={item}
-              funcTest={props.funcTest}
-            />
-          ))}
-      </ul>
+          !(item.data.thumbnail === "self") ?
+            (
+              <PostsItem
+                key={index}
+                item={item}
+                funcTest={props.funcTest}
+              />
+            ) : null
+        ))}
+      </InfiniteScroll>
     );
   }
 }
