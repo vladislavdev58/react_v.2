@@ -21,7 +21,7 @@ const PostsList = props => {
             (
               <PostsItem
                 key={index}
-                item={item}
+                item={item.data}
                 funcTest={props.funcTest}
               />
             ) : null

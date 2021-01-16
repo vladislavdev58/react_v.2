@@ -21,7 +21,6 @@ const Posts = () => {
   useEffect(() => {
     if (arPosts.length !== 0) {
       afterNameLoadingAPI = arPosts[arPosts.length - 1].data.name
-      console.log(afterNameLoadingAPI);
     }
   }, [arPosts])
 
