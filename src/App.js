@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.scss';
 import Posts from './containers/Posts/Posts'
-import Favorite from "./containers/Favorite/Favorite";
+import Favorite from "./containers/Favorite/Favorite"
 
 function App() {
   return (

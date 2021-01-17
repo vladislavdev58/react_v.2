@@ -7,12 +7,16 @@ const PostsMedia = props => {
     <React.Fragment>
       {
         item.is_video
-          ? <video src={item.media.reddit_video.fallback_url} preload="auto" autoPlay loop width="100%"></video>
+          ? (<div className="posts__video">
+              <video src={item.media.reddit_video.fallback_url} preload="auto" autoPlay loop width="100%"></video>
+            </div>)
           : item.is_gallery ?? item.hasOwnProperty('is_gallery')
           ? <Gallery
               item={item.media_metadata}
             />
-          : <img className="card-img-top" src={item.url} alt=""/>
+          : (<div className="posts__img">
+              <img className="card-img-top" src={item.url} alt=""/>
+            </div>)
       }
     </React.Fragment>
   )

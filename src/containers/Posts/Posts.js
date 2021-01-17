@@ -14,7 +14,7 @@ const Posts = () => {
 
   // Запускаем сразу загрузку
   useEffect(() => {
-    loadingAPI();
+    loadingPostsAPI();
   }, [])
 
   // Ждем пока обновится массив и задаем имя последнего поста
@@ -25,7 +25,7 @@ const Posts = () => {
   }, [arPosts])
 
 // Загрузка постов
-  const loadingAPI = () => {
+  const loadingPostsAPI = () => {
     fetch(`https://www.reddit.com/r/cats.json?limit=${limitLoadingAPI}&after=${afterNameLoadingAPI}`)
       .then(res => res.json())
       .then(
@@ -43,13 +43,33 @@ const Posts = () => {
       )
   }
 
+  //Выбор лимита загрузки
+  const showPostsSet = value =>{
+    limitLoadingAPI = value;
+  }
+
+  //Добавляем в избранное
+
+  const addFavorite = (id) => {
+    if (localStorage.getItem('arFavoriteId') == null) {
+      localStorage.setItem('arFavoriteId', JSON.stringify([id]))
+    }
+    else {
+      let arLocal = JSON.parse(localStorage.getItem('arFavoriteId'))
+      console.log(arLocal)
+      localStorage.setItem('arFavoriteId', JSON.stringify([...arLocal, ...[id]]))
+    }
+  }
+
   return (
     <div>
       <PostsList
         error={error}
         isLoaded={isLoaded}
         arPosts={arPosts}
-        loadingAPI={loadingAPI}
+        loadingPostsAPI={loadingPostsAPI}
+        showPostsSet={showPostsSet}
+        addFavorite={addFavorite}
       />
     </div>
   )

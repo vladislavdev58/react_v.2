@@ -23,7 +23,6 @@ const Gallery = props => {
       let link = props.item.[prop].s.u;
       link = link.replace(/amp;/g, '')
       arImgLocal.push(link)
-      console.log(arImg)
     }
     setArImg(arImgLocal)
   }

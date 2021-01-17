@@ -1,9 +1,13 @@
 import React from "react";
 import GalleryItem from "../GalleryItem/GalleryItem";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 const GalleryList = props => {
   return (
-    <div>
+    <Carousel
+      showThumbs={false}
+    >
       {
         props.arImg.map((link, index) => (
           <GalleryItem
@@ -12,7 +16,7 @@ const GalleryList = props => {
           />
         ))
       }
-    </div>
+    </Carousel>
   )
 }
 

@@ -1,4 +1,4 @@
-.posts__img {
+.posts__img, li.slide, .posts__video {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -6,7 +6,7 @@
     height: 512px;
   }
 
-  img {
+  img, video {
     @media (min-width: 576px) {
       position: absolute;
       top: 50%;
@@ -25,4 +25,8 @@
   @media (min-width: 576px) {
     min-height: 72px;
   }
+}
+
+.thumbs-wrapper{
+  display: none;
 }
