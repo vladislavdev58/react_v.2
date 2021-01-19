@@ -6,6 +6,7 @@ const Favorite = () => {
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [arFavorite, setArFavorite] = useState([])
+  const [emptyArray, setEmptyArray] = useState(true)
 
   useEffect(() => {
     showLocalFavorite();
@@ -13,7 +14,11 @@ const Favorite = () => {
 
   const showLocalFavorite = () => {
     const localFavorite = JSON.parse(localStorage.getItem('arFavoriteId'));
-    loadingFavoriteAPI(localFavorite);
+    console.log(localFavorite)
+    if (localFavorite !== null && localFavorite.length !== 0){
+      setEmptyArray(false)
+      loadingFavoriteAPI(localFavorite);
+    }
   }
 
   const loadingFavoriteAPI = (str) => {
@@ -34,13 +39,32 @@ const Favorite = () => {
       )
   }
 
+  const removeFavoriteItem = id => {
+    // Получаем
+    const localFavorite = JSON.parse(localStorage.getItem('arFavoriteId'));
+    // Получаем индекс
+    const indexAr = localFavorite.indexOf(id);
+    // Удаляем
+    localFavorite.splice(indexAr, 1);
+    // Перезаписываем
+    localStorage.setItem('arFavoriteId', JSON.stringify(localFavorite));
+    // Фильтруем и отображаем
+    setArFavorite(arFavorite.filter(item => item.data.name !== id))
+    // Проверяем пустой или нет
+    if (localFavorite.length === 0){
+      setEmptyArray(true)
+    }
+  }
+
   return (
-    <div className="favorite">
-      <h2 className="favorite__title">Favorite</h2>
+    <div className="favorite bg-light pt-3 px-2">
+      <h2 className="favorite__title text-center text-uppercase mb-4">Favorite</h2>
       <FavoriteList
         error={error}
         isLoaded={isLoaded}
         arFavorite={arFavorite}
+        emptyArray={emptyArray}
+        removeFavoriteItem={removeFavoriteItem}
       />
     </div>
   )

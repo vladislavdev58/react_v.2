@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PostsList from '../../components/PostsList/PostsList'
 import './Posts.scss'
 
-const Posts = () => {
+const Posts = ({loadingFavoriteAPI}) => {
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [arPosts, setArPosts] = useState([])
@@ -44,20 +44,26 @@ const Posts = () => {
   }
 
   //Выбор лимита загрузки
-  const showPostsSet = value =>{
-    limitLoadingAPI = value;
+  const showPostsSet = event =>{
+    limitLoadingAPI = event.target.value;
   }
 
   //Добавляем в избранное
-
   const addFavorite = (id) => {
-    if (localStorage.getItem('arFavoriteId') == null) {
+    let arLocal = localStorage.getItem('arFavoriteId')
+
+    if (arLocal == null) {
       localStorage.setItem('arFavoriteId', JSON.stringify([id]))
     }
     else {
-      let arLocal = JSON.parse(localStorage.getItem('arFavoriteId'))
-      console.log(arLocal)
-      localStorage.setItem('arFavoriteId', JSON.stringify([...arLocal, ...[id]]))
+      if (arLocal.includes(id)) {
+        alert('This pussy is already in the favorites 😼')
+      }
+      else {
+        arLocal = JSON.parse(arLocal)
+        console.log(arLocal)
+        localStorage.setItem('arFavoriteId', JSON.stringify([...arLocal, ...[id]]))
+      }
     }
   }
 

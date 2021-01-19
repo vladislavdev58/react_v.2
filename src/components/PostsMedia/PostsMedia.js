@@ -15,7 +15,7 @@ const PostsMedia = props => {
               item={item.media_metadata}
             />
           : (<div className="posts__img">
-              <img className="card-img-top" src={item.url} alt=""/>
+              <img className="card-img-top" src={item.url} loading="lazy" alt=""/>
             </div>)
       }
     </React.Fragment>

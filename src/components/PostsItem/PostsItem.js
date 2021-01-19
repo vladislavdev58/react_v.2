@@ -11,7 +11,7 @@ const PostsItem = props => {
         />
         <div className="card-body">
           <h5 className="card-title posts__title">{item.title}</h5>
-          <a href={`https://www.reddit.com${item.permalink}`} className="btn btn-primary">Open post</a>
+          <a href={`https://www.reddit.com${item.permalink}`} target="_blank" rel="noreferrer" className="btn btn-primary">Open post</a>
           <button className="btn btn-danger mt-2 mt-lg-0 ml-lg-2" onClick={() => props.addFavorite(item.name)}>Add favorite</button>
         </div>
       </div>
