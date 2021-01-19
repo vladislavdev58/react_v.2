@@ -57,7 +57,7 @@ const Posts = ({loadingFavoriteAPI}) => {
     }
     else {
       if (arLocal.includes(id)) {
-        alert('This pussy is already in the favorites 😼')
+        alert('This kitty is already in the favorites 😼')
       }
       else {
         arLocal = JSON.parse(arLocal)

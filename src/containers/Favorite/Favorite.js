@@ -14,7 +14,6 @@ const Favorite = () => {
 
   const showLocalFavorite = () => {
     const localFavorite = JSON.parse(localStorage.getItem('arFavoriteId'));
-    console.log(localFavorite)
     if (localFavorite !== null && localFavorite.length !== 0){
       setEmptyArray(false)
       loadingFavoriteAPI(localFavorite);
@@ -57,7 +56,7 @@ const Favorite = () => {
   }
 
   return (
-    <div className="favorite bg-light pt-3 px-2">
+    <div className="favorite pt-3 px-2">
       <h2 className="favorite__title text-center text-uppercase mb-4">Favorite</h2>
       <FavoriteList
         error={error}
